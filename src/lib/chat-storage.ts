@@ -91,9 +91,9 @@ export const exportChatHistory = (messages: Message[]): void => {
     doc.setFontSize(9);
     doc.setTextColor(200, 200, 200);
     const contactX = pageWidth - margin;
-    doc.text("rabitaamin26@gmail.com", contactX, 15, { align: "right" });
-    doc.text("LinkedIn: rabita-amin", contactX, 29, { align: "right" });
-    doc.text("GitHub: Rabita1767", contactX, 36, { align: "right" });
+    doc.text("rabitaamin26@gmail.com", contactX, 18, { align: "right" });
+    doc.text("LinkedIn: rabita-amin", contactX, 25, { align: "right" });
+    doc.text("GitHub: Rabita1767", contactX, 32, { align: "right" });
 
     yPosition = 65;
 
