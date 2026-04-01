@@ -86,7 +86,7 @@ export async function POST(req: Request) {
     }
 
     const ollama = new Ollama({
-      host: process.env.OLLAMA_BASE_URL || "https://ollama.com/api",
+      host: process.env.OLLAMA_BASE_URL || "https://ollama.com/",
       headers: {
         Authorization: `Bearer ${apiKey}`,
       },
@@ -95,9 +95,10 @@ export async function POST(req: Request) {
     const context = getCVContent();
 
     const systemPrompt = `You are an AI assistant for Rabita Amin's portfolio website. 
-Answer questions about her professional background, skills, and experience based on the provided CV.
+Answer questions about her professional background, skills, contact information,roles, responsibilities, projects and experience based on the provided CV.
 
 --- SCOPE (Strictness: ${CHAT_CONFIG.strictness.toUpperCase()}) ---
+IMPORTANT: When users say "you" or "your", they are referring to RABITA AMIN, not the AI. For example, "How can I contact you?" means "How can I contact Rabita?". Always interpret questions this way.
 Whitelisted topics: ${CHAT_CONFIG.topicWhitelist.join(", ")}
 Blacklisted topics: ${CHAT_CONFIG.topicBlacklist.join(", ")}
 
@@ -120,8 +121,29 @@ Use Markdown:
 - Highlights: **bold** for tech, *italics* for metrics, \`code\` for terms.
 - Structured info: Use tables or horizontal rules (---) when appropriate.`;
 
-    // Truncate message history to the most recent 10 messages to save tokens
-    const recentMessages = messages.slice(-10);
+    // Truncate to last 10 messages, then sanitize for Ollama's strict
+    // user/assistant alternation requirement:
+    // 1. Normalize any non-standard role (e.g. 'system') → 'user'
+    // 2. Remove consecutive messages with the same role
+    // 3. Ensure history starts with a 'user' message
+    const rawMessages = messages
+      .slice(-10)
+      .map((m: { role: string; content: string }) => ({
+        ...m,
+        role: m.role === "assistant" ? "assistant" : "user",
+      }));
+
+    const recentMessages: typeof rawMessages = [];
+    let lastRole: string | null = null;
+    for (let i = rawMessages.length - 1; i >= 0; i--) {
+      if (rawMessages[i].role !== lastRole) {
+        recentMessages.unshift(rawMessages[i]);
+        lastRole = rawMessages[i].role;
+      }
+    }
+    if (recentMessages.length > 0 && recentMessages[0].role !== "user") {
+      recentMessages.shift();
+    }
 
     const chatResponse = await ollama.chat({
       model: model,
@@ -131,7 +153,6 @@ Use Markdown:
         num_ctx: 8192,
       },
     });
-    console.log("hbdhsbdshdhsa", chatResponse);
     if (isRateLimitEnabled) {
       incrementGlobalCount();
     }
