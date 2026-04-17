@@ -3,8 +3,7 @@
 **Full-Stack Developer (MERN)**
 
 📍 Bangladesh  
-📧 rabitaamin26@gmail.com  
-📞 +8801787053663
+📧 rabitaamin26@gmail.com
 
 🔗 [GitHub](https://github.com/Rabita1767)  
 🔗 [LinkedIn](https://linkedin.com/in/rabita-amin)  
