@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import SkillsBento from "@/components/SkillsBento";
