@@ -87,7 +87,7 @@ export default function SkillsBento() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 "
       >
         {/* Backend - Large spanning 2 cols */}
         <motion.div
@@ -158,7 +158,7 @@ export default function SkillsBento() {
         {/* Dev Tools - spanning 2 cols */}
         <motion.div
           variants={item}
-          className="bento-card relative overflow-hidden group md:col-span-2 flex justify-between items-end p-8"
+          className="bento-card relative overflow-hidden group md:col-span-2 flex flex-col md:flex-row justify-between items-start md:items-end p-8 gap-4 "
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.05)_0%,transparent_70%)] z-0" />
           <div className="z-10 max-w-sm">
@@ -174,11 +174,11 @@ export default function SkillsBento() {
               .
             </p>
           </div>
-          <div className="z-10 hidden md:grid grid-cols-2 gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
+          <div className="z-10 grid grid-cols-2 gap-2 opacity-50 group-hover:opacity-100 transition-opacity w-full">
             {["Git", "Docker", "Swagger", "Postman"].map((skill) => (
               <div
                 key={skill}
-                className="px-3 py-1 border border-zinc-700 rounded-md text-xs text-zinc-300 backdrop-blur-sm"
+                className="px-3 py-1 border border-zinc-700 rounded-md text-xs text-zinc-300 backdrop-blur-sm flex justify-center"
               >
                 {skill}
               </div>

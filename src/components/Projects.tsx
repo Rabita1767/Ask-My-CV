@@ -42,7 +42,7 @@ const projects = [
     icon: <Code2 className="w-6 h-6 text-orange-400" />,
     color: "from-orange-500/20 to-transparent",
     repo: "https://github.com/Rabita1767/image-processor-app",
-    live: "https://vercel.com/rabita-amins-projects/image-processor-app-aj94",
+    live: "https://image-processor-app-aj94.vercel.app/",
   },
   {
     id: 3,

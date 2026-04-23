@@ -119,7 +119,7 @@ Image compression system with async processing
   - Async task handling
   - Real-time notifications
 - 🔗 https://github.com/Rabita1767/image-processor-app
-- 🔗 https://vercel.com/rabita-amins-projects/image-processor-app-aj94
+- 🔗 https://image-processor-app-aj94.vercel.app/
 
 ---
 
